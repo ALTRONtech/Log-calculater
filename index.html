@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logarithmic Calculator</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #73a5ff, #5477f5);
+    }
+
+    .calculator {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+      max-width: 300px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      border: none;
+      background-color: #5477f5;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #405bd3;
+    }
+
+    .history {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .history h2 {
+      margin-bottom: 10px;
+      color: #444;
+    }
+
+    .history-list {
+      list-style: none;
+      padding: 0;
+      max-height: 150px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .history-list li {
+      padding: 8px;
+      background-color: #f9f9f9;
+      border-bottom: 1px solid #ddd;
+      color: #333;
+    }
+
+    .history-list li:last-child {
+      border-bottom: none;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <h1>Logarithm Calculator</h1>
+    <input type="number" id="number" placeholder="Enter Number" />
+    <input type="number" id="base" placeholder="Enter Base (Default: 10)" />
+    <button onclick="calculateLog()">Calculate</button>
+    <p id="result"></p>
+
+    <div class="history">
+      <h2>Calculation History</h2>
+      <ul id="history-list" class="history-list"></ul>
+    </div>
+    <h3>Created By Dipesh Patne</h3>
+    &copy;2024 All Right Reserved
+  </div>
+
+  <script>
+    function calculateLog() {
+      const number = parseFloat(document.getElementById('number').value);
+      const base = parseFloat(document.getElementById('base').value) || 10;
+      const resultElement = document.getElementById('result');
+      const historyList = document.getElementById('history-list');
+
+      if (isNaN(number) || isNaN(base) || number <= 0 || base <= 0) {
+        resultElement.textContent = 'Please enter valid positive numbers.';
+        return;
+      }
+
+      const result = Math.log(number) / Math.log(base);
+      resultElement.textContent = `Log base ${base} of ${number} is ${result.toFixed(6)}`;
+
+      // Save the result to history
+      const historyItem = document.createElement('li');
+      historyItem.textContent = `log₍${base}₎(${number}) = ${result.toFixed(6)}`;
+      historyList.appendChild(historyItem);
+    }
+  </script>
+</body>
+</html>
